@@ -1,0 +1,33 @@
+# Gradle directories
+.gradle/
+build/
+**/build/
+
+# Local configuration file
+local.properties
+
+# Log files
+*.log
+
+# Android Studio / IntelliJ IDEA files
+.idea/
+*.iml
+*.ipr
+*.iws
+.navigation/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Keystores and sensitive assets
+*.jks
+*.keystore
+android_keystore
+*.pk8
+*.pem
+
+# Gemini CLI / internal workspace files
+out/
+.gemini/
+.gemini_security/
