@@ -54,7 +54,7 @@ fun PickFolderScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Welcome to MyPlayer",
+            text = "Welcome to Mina",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center
