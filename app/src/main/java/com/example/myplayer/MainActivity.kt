@@ -234,17 +234,38 @@ fun AppNavigation(
                 else -> emptyList()
             }
 
-            GroupDetailScreen(
-                title = groupName,
-                tracks = groupTracks,
-                onTrackClick = { index ->
-                    viewModel.playTracks(groupTracks, index)
-                },
-                onPlayAllClick = {
-                    viewModel.playTracks(groupTracks, 0)
-                },
-                onBackClick = { navController.popBackStack() }
-            )
+            Scaffold(
+                bottomBar = {
+                    if (currentTrack != null) {
+                        MiniPlayer(
+                            currentTrack = currentTrack,
+                            isPlaying = isPlaying,
+                            currentPosition = currentPosition,
+                            duration = duration,
+                            onPlayPauseClick = {
+                                if (isPlaying) viewModel.pause() else viewModel.play()
+                            },
+                            onNextClick = { viewModel.next() },
+                            onClick = { navController.navigate("now_playing") }
+                        )
+                    }
+                }
+            ) { innerPadding ->
+                GroupDetailScreen(
+                    title = groupName,
+                    tracks = groupTracks,
+                    onTrackClick = { index ->
+                        viewModel.playTracks(groupTracks, index)
+                        navController.navigate("now_playing")
+                    },
+                    onPlayAllClick = {
+                        viewModel.playTracks(groupTracks, 0)
+                        navController.navigate("now_playing")
+                    },
+                    onBackClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
         }
     }
 }
