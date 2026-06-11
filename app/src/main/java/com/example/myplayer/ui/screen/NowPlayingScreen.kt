@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayCircleFilled
 import androidx.compose.material.icons.filled.SkipNext
@@ -70,8 +70,8 @@ fun NowPlayingScreen(
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            imageVector = Icons.Default.KeyboardArrowDown,
+                            contentDescription = "Minimize"
                         )
                     }
                 },
