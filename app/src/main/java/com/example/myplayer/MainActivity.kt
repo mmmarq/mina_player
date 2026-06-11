@@ -256,11 +256,9 @@ fun AppNavigation(
                     tracks = groupTracks,
                     onTrackClick = { index ->
                         viewModel.playTracks(groupTracks, index)
-                        navController.navigate("now_playing")
                     },
                     onPlayAllClick = {
                         viewModel.playTracks(groupTracks, 0)
-                        navController.navigate("now_playing")
                     },
                     onBackClick = { navController.popBackStack() },
                     modifier = Modifier.padding(innerPadding)
