@@ -180,7 +180,8 @@ fun AppNavigation(
                         }
                     },
                     onGroupClick = { type, name ->
-                        navController.navigate("group_detail/$type/$name")
+                        val encodedName = java.net.URLEncoder.encode(name, "UTF-8")
+                        navController.navigate("group_detail/$type/$encodedName")
                     },
                     onChangeFolderClick = onChangeFolder,
                     onRefreshClick = { viewModel.triggerScan() },
@@ -223,7 +224,8 @@ fun AppNavigation(
             )
         ) { backStackEntry ->
             val groupType = backStackEntry.arguments?.getString("groupType") ?: ""
-            val groupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            val rawGroupName = backStackEntry.arguments?.getString("groupName") ?: ""
+            val groupName = java.net.URLDecoder.decode(rawGroupName, "UTF-8")
 
             // Gather correct tracks from Hilt ViewModel state
             val groupTracks = when (groupType) {
