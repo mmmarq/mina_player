@@ -93,7 +93,7 @@ fun DashboardScreen(
     modifier: Modifier = Modifier
 ) {
     var selectedTab by rememberSaveable { mutableIntStateOf(0) }
-    val tabTitles = listOf("Tracks", "Albums", "Artists", "Folders", "Genres", "Search")
+    val tabTitles = listOf("Tracks", "Albums", "Artists", "Favorites", "Folders", "Genres", "Search")
     val focusManager = LocalFocusManager.current
 
     var tapCount by remember { mutableIntStateOf(0) }
@@ -196,17 +196,29 @@ fun DashboardScreen(
                     icon = Icons.Default.Person,
                     onItemClick = { name -> onGroupClick("Artist", name) }
                 )
-                3 -> GroupedList(
+                3 -> {
+                    val favoriteTracks = remember(tracks) { tracks.filter { it.isFavorite } }
+                    TracksList(
+                        tracks = favoriteTracks,
+                        onTrackClick = { favIndex ->
+                            val originalIndex = tracks.indexOf(favoriteTracks[favIndex])
+                            if (originalIndex >= 0) {
+                                onTrackClick(originalIndex)
+                            }
+                        }
+                    )
+                }
+                4 -> GroupedList(
                     groups = folders,
                     icon = Icons.Default.Folder,
                     onItemClick = { name -> onGroupClick("Folder", name) }
                 )
-                4 -> GroupedList(
+                5 -> GroupedList(
                     groups = genres,
                     icon = Icons.Default.LibraryMusic,
                     onItemClick = { name -> onGroupClick("Genre", name) }
                 )
-                5 -> SearchTabScreen(
+                6 -> SearchTabScreen(
                     query = searchQuery,
                     onQueryChange = onSearchQueryChange,
                     searchResults = searchResults,
@@ -223,7 +235,11 @@ fun DashboardScreen(
     if (tracks.isNotEmpty()) {
         FloatingActionButton(
             onClick = {
-                val listToShuffle = if (selectedTab == 5) searchResults else tracks
+                val listToShuffle = when (selectedTab) {
+                    3 -> tracks.filter { it.isFavorite }
+                    6 -> searchResults
+                    else -> tracks
+                }
                 if (listToShuffle.isNotEmpty()) {
                     onShuffleClick(listToShuffle)
                 }
