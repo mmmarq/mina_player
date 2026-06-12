@@ -26,6 +26,9 @@ interface TrackDao {
     @Query("SELECT * FROM tracks WHERE fileUri = :uri LIMIT 1")
     suspend fun getTrackByUri(uri: String): Track?
 
+    @Query("UPDATE tracks SET playCount = playCount + 1 WHERE fileUri = :uri")
+    suspend fun incrementPlayCount(uri: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTracks(tracks: List<Track>)
 

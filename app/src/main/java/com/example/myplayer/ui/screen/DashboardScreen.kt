@@ -280,7 +280,11 @@ fun TracksList(
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
-                            text = track.displayArtist,
+                            text = if (track.playCount > 0) {
+                                "${track.displayArtist} • ${track.playCount} play${if (track.playCount == 1) "" else "s"}"
+                            } else {
+                                track.displayArtist
+                            },
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
                             maxLines = 1,

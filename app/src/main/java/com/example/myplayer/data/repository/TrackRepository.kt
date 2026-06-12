@@ -28,6 +28,10 @@ class TrackRepository @Inject constructor(
         return trackDao.getTrackByUri(uri)
     }
 
+    suspend fun incrementPlayCount(uri: String) {
+        trackDao.incrementPlayCount(uri)
+    }
+
     suspend fun scanSelectedFolder() {
         val folderUri = settingsRepository.musicFolderUri.value ?: return
         settingsRepository.setScanning(true)

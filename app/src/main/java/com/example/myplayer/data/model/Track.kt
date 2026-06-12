@@ -14,7 +14,8 @@ data class Track(
     val trackNumber: Int?,
     val duration: Long,
     val parentFolderUri: String,
-    val parentFolderName: String
+    val parentFolderName: String,
+    val playCount: Int = 0
 ) {
     val displayName: String
         get() = if (title.isNullOrBlank()) fileName else title

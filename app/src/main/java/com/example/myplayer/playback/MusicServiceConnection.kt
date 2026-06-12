@@ -69,6 +69,11 @@ class MusicServiceConnection @Inject constructor(
 
                     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
                         updateCurrentTrack(mediaItem)
+                        mediaItem?.mediaId?.let { uri ->
+                            scope.launch {
+                                trackRepository.incrementPlayCount(uri)
+                            }
+                        }
                     }
 
                     override fun onPlaybackStateChanged(playbackState: Int) {
