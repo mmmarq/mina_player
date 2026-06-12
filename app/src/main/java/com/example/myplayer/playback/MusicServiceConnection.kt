@@ -101,7 +101,11 @@ class MusicServiceConnection @Inject constructor(
     private fun updateCurrentTrack(mediaItem: MediaItem?) {
         val uri = mediaItem?.mediaId ?: return
         scope.launch {
-            _currentTrack.value = trackRepository.getTrackByUri(uri)
+            val track = trackRepository.getTrackByUri(uri)
+            _currentTrack.value = track
+            if (track != null) {
+                _duration.value = track.duration
+            }
         }
     }
 
