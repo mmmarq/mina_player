@@ -29,6 +29,9 @@ interface TrackDao {
     @Query("UPDATE tracks SET playCount = playCount + 1 WHERE fileUri = :uri")
     suspend fun incrementPlayCount(uri: String)
 
+    @Query("UPDATE tracks SET isFavorite = :isFavorite WHERE fileUri = :uri")
+    suspend fun updateFavoriteStatus(uri: String, isFavorite: Boolean)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTracks(tracks: List<Track>)
 

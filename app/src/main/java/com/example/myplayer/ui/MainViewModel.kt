@@ -175,4 +175,11 @@ class MainViewModel @Inject constructor(
             musicServiceConnection.playTrackList(trackList, startIndex)
         }
     }
+
+    fun toggleFavorite(track: Track) {
+        viewModelScope.launch {
+            trackRepository.updateFavoriteStatus(track.fileUri, !track.isFavorite)
+            musicServiceConnection.refreshCurrentTrack()
+        }
+    }
 }

@@ -105,6 +105,11 @@ class MusicServiceConnection @Inject constructor(
         }
     }
 
+    fun refreshCurrentTrack() {
+        val currentMediaItem = mediaController?.currentMediaItem
+        updateCurrentTrack(currentMediaItem)
+    }
+
     private fun startProgressUpdate() {
         stopProgressUpdate()
         progressUpdateJob = scope.launch {

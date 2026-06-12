@@ -14,6 +14,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.Pause
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarBorder
+import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -35,6 +38,7 @@ fun MiniPlayer(
     onPlayPauseClick: () -> Unit,
     onNextClick: () -> Unit,
     onClick: () -> Unit,
+    onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (currentTrack == null) return
@@ -82,6 +86,14 @@ fun MiniPlayer(
             }
 
             Spacer(modifier = Modifier.width(8.dp))
+
+            IconButton(onClick = onFavoriteClick) {
+                Icon(
+                    imageVector = if (currentTrack.isFavorite) Icons.Default.Star else Icons.Default.StarBorder,
+                    contentDescription = "Favorite",
+                    tint = if (currentTrack.isFavorite) Color(0xFFFFD700) else Color.Gray
+                )
+            }
 
             IconButton(onClick = onPlayPauseClick) {
                 Icon(

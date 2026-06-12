@@ -32,6 +32,10 @@ class TrackRepository @Inject constructor(
         trackDao.incrementPlayCount(uri)
     }
 
+    suspend fun updateFavoriteStatus(uri: String, isFavorite: Boolean) {
+        trackDao.updateFavoriteStatus(uri, isFavorite)
+    }
+
     suspend fun scanSelectedFolder() {
         val folderUri = settingsRepository.musicFolderUri.value ?: return
         settingsRepository.setScanning(true)

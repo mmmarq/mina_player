@@ -151,7 +151,8 @@ fun AppNavigation(
                                 if (isPlaying) viewModel.pause() else viewModel.play()
                             },
                             onNextClick = { viewModel.next() },
-                            onClick = { navController.navigate("now_playing") }
+                            onClick = { navController.navigate("now_playing") },
+                            onFavoriteClick = { currentTrack?.let { viewModel.toggleFavorite(it) } }
                         )
                     }
                 }
@@ -212,7 +213,8 @@ fun AppNavigation(
                 onNextClick = { viewModel.next() },
                 onPreviousClick = { viewModel.previous() },
                 onSeek = { position -> viewModel.seekTo(position) },
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() },
+                onFavoriteClick = { currentTrack?.let { viewModel.toggleFavorite(it) } }
             )
         }
 
@@ -248,7 +250,8 @@ fun AppNavigation(
                                 if (isPlaying) viewModel.pause() else viewModel.play()
                             },
                             onNextClick = { viewModel.next() },
-                            onClick = { navController.navigate("now_playing") }
+                            onClick = { navController.navigate("now_playing") },
+                            onFavoriteClick = { currentTrack?.let { viewModel.toggleFavorite(it) } }
                         )
                     }
                 }
